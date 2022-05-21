@@ -1,38 +1,97 @@
 .App {
-  text-align: center;
+  font-family: 'Roboto', sans-serif;
+  /* text-align: center; */
 }
+.profile-pic{
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
+  height: 300px;
+  width: 300px;
+  object-fit:cover;
   }
+.btn-like,.btn-dislike{
+  font-size:1.2rem;
+  margin-top: 5px;
+  margin-bottom:10px ;
 }
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+.btn-like{
+  margin-right :0.5rem;
+}
+.user-detail{
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  
+
+}
+.user-container{
+  /* border-top:5px solid orange; */
+  padding:1.2rem;
+  /* border: 2px solid black; */
+  margin:20px;
+  text-align: center;
+}
+.add-color{
+display: flex;
+
+}
+.movie-container{
+  width: 320px;
+
+}
+.movie-specs{
+  display:flex;
+align-items: center;
+justify-content: space-between;
+}
+.movie-poster{
+  width: 320px;
+  height: 430px;
+  object-fit:fill ;
+
+}
+.movie-name{
+margin-top: 0;
+}
+.movie-summary{
+  margin:0;
+}
+.movie-rating{
+font-size: 18px;
+}
+.movie-list{
+display: flex;
+flex-wrap: wrap;
+justify-content: space-around;
+gap:16px;
+margin-top: 15px;
+margin-bottom: 15px;
+}
+.tgl-btn{
+  margin-top:10px;
+  margin-bottom:5px;
+  
+}
+.not-found{
+  width: 100%;
+  max-height: 500px;
+  object-fit:contain;
+}
+.movie-detail-container{
+
+  max-width: 800px;
+  
+}
+.back-button{
+margin:20px;
+width:100px;
+height: 50px;
 }
 
-.App-link {
-  color: #61dafb;
+.movie-detail-name{
+  text-align: center;
 }
-
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.add-movie-form{
+  display: flex;
+  flex-direction: column;
+  gap:10px;
 }
