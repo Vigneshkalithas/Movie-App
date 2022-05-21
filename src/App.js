@@ -4,6 +4,8 @@ import { AddColor } from "./AddColor";
 import { useState } from "react";
 import { Routes,Route,Link,useNavigate, Navigate,useParams } from "react-router-dom";
 import Button from '@mui/material/Button';
+import TextField from '@mui/material/TextField';
+import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Home } from "./Home";
 
 
@@ -175,7 +177,9 @@ src={movie.trailer}
     <p className="movie-rating" style={styles}>⭐{movie.rating}</p>
   </div>
   <p className="movie-summary">{movie.summary}</p> 
-  <button className="back-button"onClick={()=>(navigate(-1))}>Back</button>
+  <Button  startIcon={<ArrowBackIosIcon />} className="back-button" variant="contained" onClick={()=>(navigate(-1))}>
+  Back
+</Button>
 </div>
 
 </div>
@@ -202,13 +206,21 @@ const addMovie = ()=>{
   return(
     <div>
       <div className="add-movie-form">
-   <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Name"></input>
+      <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event) => setName(event.target.value)}/>
+      <TextField id="outlined-basic" label="Rating" variant="outlined" onChange={(event) => setRating(event.target.value)}/>
+      <TextField id="outlined-basic" label="Summary" variant="outlined" onChange={(event) => setSummary(event.target.value)}/>
+      <TextField id="outlined-basic" label="Poster" variant="outlined" onChange={(event) => setPoster(event.target.value)}/>
+      <TextField id="outlined-basic" label="Trailer" variant="outlined" onChange={(event) => setTrailer(event.target.value)}/>
+
+
+
+   {/* <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Name"></input>
    <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Rating"></input>
    <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Summary"></input>
    <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Poster"></input>
-   <input onChange={(event) => setTrailer(event.target.value)} type="text" placeholder="Trailer"></input>
-   <Button variant="outlined">Outlined</Button>
-   <button onClick={addMovie}>Add Movie</button>
+   <input onChange={(event) => setTrailer(event.target.value)} type="text" placeholder="Trailer"></input> */}
+   <Button variant="outlined" onClick={addMovie}>Add Movie</Button>
+   
 
       </div>
 
