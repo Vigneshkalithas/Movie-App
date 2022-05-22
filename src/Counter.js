@@ -15,7 +15,7 @@ export function Counter() {
   const incrementLike = () => { setLike(like + 1); }
   const incrementDisLike = () => { setdisLike(dislike + 1); }
   return (
-    <div>
+    <div className="btn-like">
       <IconButton color="primary" 
       aria-label="like" onClick={incrementLike}>
               <Badge badgeContent={like} color="primary">

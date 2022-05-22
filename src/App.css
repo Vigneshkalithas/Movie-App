@@ -8,14 +8,7 @@
   width: 300px;
   object-fit:cover;
   }
-.btn-like,.btn-dislike{
-  font-size:1.2rem;
-  margin-top: 5px;
-  margin-bottom:10px ;
-}
-.btn-like{
-  margin-right :0.5rem;
-}
+
 .user-detail{
   display: flex;
   flex-direction: column;
@@ -36,6 +29,7 @@ display: flex;
 }
 .movie-container{
   width: 320px;
+  height: min-content;
 
 }
 .movie-specs{
@@ -94,4 +88,8 @@ height: 50px;
   display: flex;
   flex-direction: column;
   gap:10px;
+}
+.add-movie-form{
+
+  margin-top: 20px;
 }
