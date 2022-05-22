@@ -1,13 +1,12 @@
 import "./App.css";
-import { Counter } from "./Counter";
 import { AddColor } from "./AddColor";
 import { useState } from "react";
-import { Routes,Route,Link,useNavigate, Navigate } from "react-router-dom";
-import Button from '@mui/material/Button';
-import TextField from '@mui/material/TextField';
+import { Routes,Route,Link,Navigate } from "react-router-dom";
 import { Home } from "./Home";
 import { NotFound } from "./NotFound";
 import { MovieDetails } from "./MovieDetails";
+import { Msg } from "./Msg";
+import { MovieList } from "./MovieList.1";
 
 
 
@@ -140,53 +139,6 @@ return (
 }
 
 
-function MovieList({ movieList, setMovieList }) {
-  // const movieList=INTIAL_MOVIE_LIST;
-
-  const [name, setName] = useState("");
-  const [rating, setRating] = useState("");
-  const [summary, setSummary] = useState("");
-  const [poster, setPoster] = useState("");
-  const [trailer, setTrailer] = useState("");
-
-  const addMovie = () => {
-    const newMovie = { name, rating, summary, poster, trailer };
-    setMovieList([...movieList, newMovie]);
-  };
-
-  return (
-    <div>
-      <div className="add-movie-form">
-        <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event) => setName(event.target.value)} />
-        <TextField id="outlined-basic" label="Rating" variant="outlined" onChange={(event) => setRating(event.target.value)} />
-        <TextField id="outlined-basic" label="Summary" variant="outlined" onChange={(event) => setSummary(event.target.value)} />
-        <TextField id="outlined-basic" label="Poster" variant="outlined" onChange={(event) => setPoster(event.target.value)} />
-        <TextField id="outlined-basic" label="Trailer" variant="outlined" onChange={(event) => setTrailer(event.target.value)} />
-
-
-
-        {/* <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Name"></input>
-            <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Rating"></input>
-            <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Summary"></input>
-            <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Poster"></input>
-            <input onChange={(event) => setTrailer(event.target.value)} type="text" placeholder="Trailer"></input> */}
-        <Button variant="outlined" onClick={addMovie}>Add Movie</Button>
-
-
-      </div>
-
-      <div className="movie-list">
-        {movieList.map((mv, index) => (
-          <Moviecard key={index} movie={mv} id={index} />
-        ))}
-      </div>
-    </div>
-
-  );
-}
-
-
-
 function UserList(){
 
   const users = [{
@@ -215,53 +167,4 @@ function UserList(){
   )
 }
 
-function Msg({name, pic}){
-  return (
-    <div className="user-container">
-      <img className="profile-pic" src={pic} alt={name} />
-      <h1>Hi,{name}😎😊🤞</h1>
-      <Counter/>
-    </div>
-  );
-}
-
-
-
-export function Moviecard({movie , id}){
-  const [show,setShow]=useState(true)
-  
-
-  const styles={
-    color: movie.rating> 8 ? "green":"red"
-  }
-
-  const summarystyle={
-display: show ?  "block" : "none"   
-  }
-
-  const navigate = useNavigate();
-  return(
-    <div className="movie-container">
-      <img className="movie-poster" src={movie.poster} alt={movie.name}></img>
-      <div className="movie-specs">
-        <h2 className="movie-name">{movie.name}</h2>
-        <p className="movie-rating" style={styles}>⭐{movie.rating}</p>
-      </div>
-      <button onClick={()=>navigate("/movies/" + id )}>Info</button>
-      <button className="tgl-btn" onClick={(()=>{ setShow(!show) })}> Toggle </button> 
-       
-
-        {/* conditional styling */}
-
-        {/* <p className="movie-summary" style={summarystyle}>{movie.summary}</p> */}
-
-
-        {/* conditinal rendering */} 
-
-     { show ? <p className="movie-summary">{movie.summary}</p> : ""}
-      <Counter/>
-    </div>
-    
-  )
-}
 
