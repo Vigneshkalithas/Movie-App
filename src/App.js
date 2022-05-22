@@ -2,11 +2,13 @@ import "./App.css";
 import { Counter } from "./Counter";
 import { AddColor } from "./AddColor";
 import { useState } from "react";
-import { Routes,Route,Link,useNavigate, Navigate,useParams } from "react-router-dom";
+import { Routes,Route,Link,useNavigate, Navigate } from "react-router-dom";
 import Button from '@mui/material/Button';
 import TextField from '@mui/material/TextField';
-import ArrowBackIosIcon from '@mui/icons-material/ArrowBackIos';
 import { Home } from "./Home";
+import { NotFound } from "./NotFound";
+import { MovieDetails } from "./MovieDetails";
+
 
 
 
@@ -103,7 +105,8 @@ return (
   
            <li><Link to="/">Home</Link></li>
            <li><Link to="/movies">Movies</Link></li>
-           <li><Link to="color-game">Color Game</Link></li>
+           <li><Link to="/color-game">Color Game</Link></li>
+           <li><Link to="/add-movie">Add movie</Link></li>
            <li><Link to="/users">Users</Link></li>
            
         </ul>
@@ -124,6 +127,7 @@ return (
 
       <Route path="/color-game" element={<AddColor />} />
       <Route path="/users" element={<UserList />} />
+      <Route path="/add-movie" element={<MovieList />} />
       <Route path="/404" element={<NotFound />} />
       <Route path="*" element={<Navigate replace to="/404" />} />
     </Routes>
@@ -136,103 +140,52 @@ return (
 }
 
 
-function NotFound(){
-
-  return (<div>
-    <img src="https://cdn.dribbble.com/users/1175431/screenshots/6188233/404-error-dribbble-800x600.gif" alt="404 not found" className="not-found"/>
-  </div>)
-}
-
-function MovieDetails( { movieList} ){
-
-  const { movieid } = useParams();
-  const navigate = useNavigate();
-  const movie=movieList[movieid]
-  const styles={
-    color: movie.rating> 8 ? "green":"red"
-  }
-return(
-
-<div>
-  
-<iframe width="100%" 
-height="500" 
-src={movie.trailer}
- title="YouTube video player"
- frameborder="0" 
- allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
-  allowfullscreen>
-</iframe>
-
-<div className="movie-detail-container">
-
-      {/* <div>
-    <h1>{ movieList.name}</h1>
-   
-  </div> */}
- {/* <img className="movie-poster" src={movieList.poster} alt={movieList.name}></img> */}
-
-  <div className="movie-specs">
-    <h2 className="movie-name">{movie.name}</h2>
-    <p className="movie-rating" style={styles}>⭐{movie.rating}</p>
-  </div>
-  <p className="movie-summary">{movie.summary}</p> 
-  <Button  startIcon={<ArrowBackIosIcon />} className="back-button" variant="contained" onClick={()=>(navigate(-1))}>
-  Back
-</Button>
-</div>
-
-</div>
-)
-}
-
-function MovieList({movieList,setMovieList}){
-
+function MovieList({ movieList, setMovieList }) {
   // const movieList=INTIAL_MOVIE_LIST;
 
- 
+  const [name, setName] = useState("");
+  const [rating, setRating] = useState("");
+  const [summary, setSummary] = useState("");
+  const [poster, setPoster] = useState("");
+  const [trailer, setTrailer] = useState("");
 
-const [name, setName] = useState("");
-const [rating, setRating] = useState("");
-const [summary, setSummary] = useState("");
-const [poster, setPoster] = useState("");
-const [trailer, setTrailer] = useState("");
+  const addMovie = () => {
+    const newMovie = { name, rating, summary, poster, trailer };
+    setMovieList([...movieList, newMovie]);
+  };
 
-const addMovie = ()=>{
-  const newMovie={name,rating,summary,poster,trailer}
-  setMovieList([...movieList,newMovie])
-}
-
-  return(
+  return (
     <div>
       <div className="add-movie-form">
-      <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event) => setName(event.target.value)}/>
-      <TextField id="outlined-basic" label="Rating" variant="outlined" onChange={(event) => setRating(event.target.value)}/>
-      <TextField id="outlined-basic" label="Summary" variant="outlined" onChange={(event) => setSummary(event.target.value)}/>
-      <TextField id="outlined-basic" label="Poster" variant="outlined" onChange={(event) => setPoster(event.target.value)}/>
-      <TextField id="outlined-basic" label="Trailer" variant="outlined" onChange={(event) => setTrailer(event.target.value)}/>
+        <TextField id="outlined-basic" label="Name" variant="outlined" onChange={(event) => setName(event.target.value)} />
+        <TextField id="outlined-basic" label="Rating" variant="outlined" onChange={(event) => setRating(event.target.value)} />
+        <TextField id="outlined-basic" label="Summary" variant="outlined" onChange={(event) => setSummary(event.target.value)} />
+        <TextField id="outlined-basic" label="Poster" variant="outlined" onChange={(event) => setPoster(event.target.value)} />
+        <TextField id="outlined-basic" label="Trailer" variant="outlined" onChange={(event) => setTrailer(event.target.value)} />
 
 
 
-   {/* <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Name"></input>
-   <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Rating"></input>
-   <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Summary"></input>
-   <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Poster"></input>
-   <input onChange={(event) => setTrailer(event.target.value)} type="text" placeholder="Trailer"></input> */}
-   <Button variant="outlined" onClick={addMovie}>Add Movie</Button>
-   
+        {/* <input onChange={(event) => setName(event.target.value)} type="text" placeholder="Name"></input>
+            <input onChange={(event) => setRating(event.target.value)} type="text" placeholder="Rating"></input>
+            <input onChange={(event) => setSummary(event.target.value)} type="text" placeholder="Summary"></input>
+            <input onChange={(event) => setPoster(event.target.value)} type="text" placeholder="Poster"></input>
+            <input onChange={(event) => setTrailer(event.target.value)} type="text" placeholder="Trailer"></input> */}
+        <Button variant="outlined" onClick={addMovie}>Add Movie</Button>
+
 
       </div>
 
       <div className="movie-list">
-      {movieList.map((mv,index)=>(
-      <Moviecard key={index} movie={mv} id={index}/>
-      ))}
+        {movieList.map((mv, index) => (
+          <Moviecard key={index} movie={mv} id={index} />
+        ))}
       </div>
     </div>
 
-  )
+  );
 }
+
+
 
 function UserList(){
 
@@ -274,7 +227,7 @@ function Msg({name, pic}){
 
 
 
-function Moviecard({movie , id}){
+export function Moviecard({movie , id}){
   const [show,setShow]=useState(true)
   
 
