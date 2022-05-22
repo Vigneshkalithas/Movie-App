@@ -1,4 +1,8 @@
 import { useState } from "react";
+import IconButton from '@mui/material/IconButton';
+import Badge from '@mui/material/Badge';
+import ThumbUpTwoToneIcon from '@mui/icons-material/ThumbUpTwoTone';
+import ThumbDownOffAltTwoToneIcon from '@mui/icons-material/ThumbDownOffAltTwoTone';
 
 // hook is function - stars with 'use'
 // useState 
@@ -12,8 +16,23 @@ export function Counter() {
   const incrementDisLike = () => { setdisLike(dislike + 1); }
   return (
     <div>
-      <button className="btn-like" onClick={incrementLike}>👍{like}</button>
-      <button className="btn-dislike" onClick={incrementDisLike}>👎{dislike}</button>
+      <IconButton color="primary" 
+      aria-label="like" onClick={incrementLike}>
+              <Badge badgeContent={like} color="primary">
+              {/* < ThumbUpTwoToneIcon/> */}
+              👍
+              </Badge>
+     </IconButton>
+
+     <IconButton color="error" aria-label="like"  onClick={incrementDisLike}>
+              <Badge badgeContent={dislike} color="error">
+              {/* <ThumbDownOffAltTwoToneIcon /> */}
+              👎
+              </Badge>
+     </IconButton>
+     
+      {/* <button className="btn-like" onClick={incrementLike}>👍{like}</button>
+      <button className="btn-dislike" onClick={incrementDisLike}>👎{dislike}</button> */}
     </div>
   );
 }

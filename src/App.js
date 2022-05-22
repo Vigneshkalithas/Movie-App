@@ -5,8 +5,8 @@ import { Routes,Route,Link,Navigate } from "react-router-dom";
 import { Home } from "./Home";
 import { NotFound } from "./NotFound";
 import { MovieDetails } from "./MovieDetails";
-import { Msg } from "./Msg";
-import { MovieList } from "./MovieList.1";
+import { AddMovie, MovieList } from "./MovieList";
+import { UserList } from "./UserList";
 
 
 
@@ -104,8 +104,8 @@ return (
   
            <li><Link to="/">Home</Link></li>
            <li><Link to="/movies">Movies</Link></li>
+           <li><Link to="/movies/add">Add movie</Link></li>
            <li><Link to="/color-game">Color Game</Link></li>
-           <li><Link to="/add-movie">Add movie</Link></li>
            <li><Link to="/users">Users</Link></li>
            
         </ul>
@@ -126,7 +126,7 @@ return (
 
       <Route path="/color-game" element={<AddColor />} />
       <Route path="/users" element={<UserList />} />
-      <Route path="/add-movie" element={<MovieList />} />
+      <Route path="/movies/add" element={<AddMovie movieList={movieList} setMovieList={setMovieList} />} />
       <Route path="/404" element={<NotFound />} />
       <Route path="*" element={<Navigate replace to="/404" />} />
     </Routes>
@@ -138,33 +138,5 @@ return (
   );
 }
 
-
-function UserList(){
-
-  const users = [{
-    name:"Vignesh kalithas",
-    pic:"https://www.pngall.com/wp-content/uploads/5/Profile-Male-PNG.png"
-  },
-  {
-    name : "Lakshmiprabha Kalithas",
-    pic : "https://cdn-icons-png.flaticon.com/512/219/219990.png"
-  
-  },
-  {
-    name : "Kalithas Ramasamy",
-    pic : "https://p8cdn4static.sharpschool.com/UserFiles/Servers/Server_416292/Image/Profile%20pic.png"
-  
-  },
-  ];
-
-  return(
-    <div className="user-detail">
-   {users.map((user)=>(
-     <Msg name={user.name} pic={user.pic} /> 
-   ))}
-
-    </div>
-  )
-}
 
 
